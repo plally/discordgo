@@ -2597,6 +2597,7 @@ func (s *Session) GetGuildApplicationCommandPermissions(appID, guildID string) (
 	err = unmarshal(data, &permissions)
 	return
 }
+
 // GetApplicationCommandPermission Fetches command permissions for a specific command for your application in a guild
 // appID     : The application ID.
 // guildID   : The guild ID
