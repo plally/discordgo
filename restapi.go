@@ -2585,7 +2585,7 @@ func (s *Session) FollowupMessageDelete(appID string, interaction *Interaction, 
 
 // GetGuildApplicationCommandPermissions Fetches command permissions for all commands for your application in a guild.
 // appID   : The application ID.
-// guildID : The guild ID
+// guildID : The guild ID.
 func (s *Session) GetGuildApplicationCommandPermissions(appID, guildID string) (permissions []GuildApplicationCommandPermissions, err error) {
 	endpoint := EndpointGuildApplicationCommandPermissions(appID, guildID)
 
@@ -2598,10 +2598,10 @@ func (s *Session) GetGuildApplicationCommandPermissions(appID, guildID string) (
 	return
 }
 
-// GetApplicationCommandPermission Fetches command permissions for a specific command for your application in a guild
+// GetApplicationCommandPermission Fetches command permissions for a specific command for your application in a guild.
 // appID     : The application ID.
-// guildID   : The guild ID
-// commandID : the command ID
+// guildID   : The guild ID.
+// commandID : the command ID.
 func (s *Session) GetApplicationCommandPermission(appID, guildID, commandID string) (permission GuildApplicationCommandPermissions, err error) {
 	endpoint := EndpointApplicationCommandPermission(appID, guildID, commandID)
 
@@ -2615,7 +2615,7 @@ func (s *Session) GetApplicationCommandPermission(appID, guildID, commandID stri
 }
 
 // EditApplicationCommandPermissions edits command permissions for a specific command for your application in a guild.
-// permissions : The permissions to edit
+// permissions : The permissions to edit.
 func (s *Session) EditApplicationCommandPermissions(permissions GuildApplicationCommandPermissions) (err error) {
 	endpoint := EndpointApplicationCommandPermission(permissions.ApplicationID, permissions.GuildID, permissions.ID)
 
@@ -2624,10 +2624,10 @@ func (s *Session) EditApplicationCommandPermissions(permissions GuildApplication
 	return
 }
 
-// BatchEditApplicationCommandPermissions Batch edits permissions for all commands in a guild
-// appID       : The application ID
-// guildID     : The Guild ID
-// permissions : The permissions to update
+// BatchEditApplicationCommandPermissions Batch edits permissions for all commands in a guild.
+// appID       : The application ID.
+// guildID     : The Guild ID.
+// permissions : The permissions to update.
 func (s *Session) BatchEditApplicationCommandPermissions(appID, guildID string, permissions []GuildApplicationCommandPermissions) (err error) {
 	endpoint := EndpointGuildApplicationCommandPermissions(appID, guildID)
 
