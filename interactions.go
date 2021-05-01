@@ -15,12 +15,13 @@ const InteractionDeadline = time.Second * 3
 
 // ApplicationCommand represents an application's slash command.
 type ApplicationCommand struct {
-	ID            string                      `json:"id"`
-	ApplicationID string                      `json:"application_id,omitempty"`
-	Name          string                      `json:"name"`
-	Description   string                      `json:"description,omitempty"`
-	Version       string                      `json:"version,omitempty"`
-	Options       []*ApplicationCommandOption `json:"options"`
+	ID                string                      `json:"id"`
+	ApplicationID     string                      `json:"application_id,omitempty"`
+	Name              string                      `json:"name"`
+	Description       string                      `json:"description,omitempty"`
+	Version           string                      `json:"version,omitempty"`
+	Options           []*ApplicationCommandOption `json:"options"`
+	DefaultPermission bool                        `json:"default_permission"`
 }
 
 // ApplicationCommandOptionType indicates the type of a slash command's option.
@@ -255,6 +256,25 @@ type InteractionApplicationCommandResponseData struct {
 
 	// NOTE: Undocumented feature, be careful with it.
 	Flags uint64 `json:"flags,omitempty"`
+}
+type ApplicationCommandPermissionType uint8
+
+const (
+	ApplicationCommandPermissionRole ApplicationCommandPermissionType = iota + 1
+	ApplicationCommandPermissionUser
+)
+
+type GuildApplicationCommandPermissions struct {
+	ID            string                          `json:"id"`
+	ApplicationID string                          `json:"application_id"`
+	GuildID       string                          `json:"guild_id"`
+	Permissions   []ApplicationCommandPermissions `json:"permissions"`
+}
+
+type ApplicationCommandPermissions struct {
+	ID         string                           `json:"id"`
+	Type       ApplicationCommandPermissionType `json:"type"`
+	Permission bool                             `json:"permission"`
 }
 
 // VerifyInteraction implements message verification of the discord interactions api

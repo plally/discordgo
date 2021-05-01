@@ -165,6 +165,13 @@ var (
 		return EndpointWebhookMessage(aID, iToken, mID)
 	}
 
+	EndpointGuildApplicationCommandPermissions = func(aID, gID string) string {
+		return EndpointApplicationGuildCommands(aID, gID) + "/permissions"
+	}
+	EndpointApplicationCommandPermission = func(aID, gID, cID string) string {
+		return EndpointApplicationGuildCommands(aID, gID) + "/" + cID + "/permissions"
+	}
+
 	EndpointRelationships       = func() string { return EndpointUsers + "@me" + "/relationships" }
 	EndpointRelationship        = func(uID string) string { return EndpointRelationships() + "/" + uID }
 	EndpointRelationshipsMutual = func(uID string) string { return EndpointUsers + uID + "/relationships" }
