@@ -2582,3 +2582,55 @@ func (s *Session) FollowupMessageEdit(appID string, interaction *Interaction, me
 func (s *Session) FollowupMessageDelete(appID string, interaction *Interaction, messageID string) error {
 	return s.WebhookMessageDelete(appID, interaction.Token, messageID)
 }
+
+// GetGuildApplicationCommandPermissions Fetches command permissions for all commands for your application in a guild.
+// appID   : The application ID.
+// guildID : The guild ID
+func (s *Session) GetGuildApplicationCommandPermissions(appID, guildID string) (permissions []GuildApplicationCommandPermissions, err error) {
+	endpoint := EndpointGuildApplicationCommandPermissions(appID, guildID)
+
+	data, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint)
+	if err != nil {
+		return
+	}
+
+	err = unmarshal(data, &permissions)
+	return
+}
+// GetApplicationCommandPermission Fetches command permissions for a specific command for your application in a guild
+// appID     : The application ID.
+// guildID   : The guild ID
+// commandID : the command ID
+func (s *Session) GetApplicationCommandPermission(appID, guildID, commandID string) (permission GuildApplicationCommandPermissions, err error) {
+	endpoint := EndpointApplicationCommandPermission(appID, guildID, commandID)
+
+	data, err := s.RequestWithBucketID("GET", endpoint, nil, endpoint)
+	if err != nil {
+		return
+	}
+
+	err = unmarshal(data, &permission)
+	return
+}
+
+// EditApplicationCommandPermissions edits command permissions for a specific command for your application in a guild.
+// permissions : The permissions to edit
+func (s *Session) EditApplicationCommandPermissions(permissions GuildApplicationCommandPermissions) (err error) {
+	endpoint := EndpointApplicationCommandPermission(permissions.ApplicationID, permissions.GuildID, permissions.ID)
+
+	_, err = s.RequestWithBucketID("PUT", endpoint, permissions.Permissions, endpoint)
+
+	return
+}
+
+// BatchEditApplicationCommandPermissions Batch edits permissions for all commands in a guild
+// appID       : The application ID
+// guildID     : The Guild ID
+// permissions : The permissions to update
+func (s *Session) BatchEditApplicationCommandPermissions(appID, guildID string, permissions []GuildApplicationCommandPermissions) (err error) {
+	endpoint := EndpointGuildApplicationCommandPermissions(appID, guildID)
+
+	_, err = s.RequestWithBucketID("PUT", endpoint, permissions, endpoint)
+
+	return
+}
