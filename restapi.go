@@ -2619,7 +2619,7 @@ func (s *Session) ApplicationCommandPermission(appID, guildID, commandID string)
 func (s *Session) ApplicationCommandPermissionsEdit(permissions GuildApplicationCommandPermissions) (err error) {
 	endpoint := EndpointApplicationCommandPermission(permissions.ApplicationID, permissions.GuildID, permissions.ID)
 
-	_, err = s.RequestWithBucketID("PUT", endpoint, permissions.Permissions, endpoint)
+	_, err = s.RequestWithBucketID("PUT", endpoint, permissions, endpoint)
 
 	return
 }
