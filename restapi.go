@@ -2522,7 +2522,6 @@ func (s *Session) ApplicationCommandEdit(appID, guildID, cmdID string, cmd *Appl
 	return
 }
 
-
 // ApplicationCommandBulkOverwrite Creates commands overwriting existing commands. Returns a list of commands.
 // appID    : The application ID.
 // commands : The commands to create.
