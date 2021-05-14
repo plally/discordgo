@@ -2027,8 +2027,7 @@ func (s *Session) GuildWebhooks(guildID string) (st []*Webhook, err error) {
 // webhookID: The ID of a webhook.
 func (s *Session) Webhook(webhookID string) (st *Webhook, err error) {
 
-	var body []byte
-	body, err = s.RequestWithBucketID("GET", EndpointWebhook(webhookID), nil, EndpointWebhooks)
+	body, err := s.RequestWithBucketID("GET", EndpointWebhook(webhookID), nil, EndpointWebhooks)
 	if err != nil {
 		return
 	}
@@ -2134,7 +2133,10 @@ func (s *Session) WebhookExecute(webhookID, token string, wait bool, data *Webho
 
 	var response []byte
 	if len(data.Files) > 0 {
-		contentType, body, err := MakeFilesBody(data, data.Files)
+		var contentType string
+		var body []byte
+
+		contentType, body, err = MakeFilesBody(data, data.Files)
 		if err != nil {
 			return
 		}
